@@ -1,0 +1,13 @@
+{
+  "_comment": "SQL Auth (username/password)",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;database=AKPayDB;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

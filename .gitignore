@@ -1,0 +1,23 @@
+# .NET build output
+**/bin/
+**/obj/
+.vs/
+
+# User-specific files
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Secrets / local config
+**/appsettings.json
+**/appsettings.*.json
+
+# Keep examples
+!**/appsettings.example.json
+!**/appsettings.json.example
+
+# Backup files
+*.bak
+*.bacpac

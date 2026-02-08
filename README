@@ -1,0 +1,73 @@
+# AKPay — WinForms + SQL Server (LINQ vs Stored Procedures)
+
+AKPay is a Windows desktop campus-wallet concept built for a database systems course.
+
+The intended product idea is a **private, secure payments network inside a single university** (e.g., a LUMS-like environment) where students/faculty/staff can send money to each other within the same trusted identity domain.
+
+A second pillar is **fast vendor payments on campus via QR codes**: the vendor/cashier generates a QR code per bill (with vendor + amount), and the user scans it to auto-fill the payment form and complete the transaction.
+
+The “showcase” engineering requirement was implementing the same business flows using **two interchangeable data-access strategies** behind one service contract, selected at runtime (factory/selector pattern):
+
+- **LINQ implementation** (C# logic + LINQ queries)
+- **Stored procedure implementation** (C# calls into SQL sprocs/functions)
+
+> This repository is curated for **code review / architecture tour**. It is a course project and is not presented as production-ready. The product concept is mobile-first, but WinForms was used here to keep the UI deliverable scoped while focusing on database design, data-access architecture, and end-to-end flows.
+
+## What the app does
+- User auth flows (register/login)
+- Balance/top-up flows
+- User-to-user transfers
+- Vendor payments (QR-scan friendly flow)
+- Transaction history + basic insights/budget tracking
+
+## Tech stack
+- .NET WinForms (`net10.0-windows`)
+- Entity Framework Core + SQL Server
+- Two backends behind one interface: LINQ vs stored procedures/functions
+- Kubernetes manifests (course extra credit) for deploying the app + database with persistent storage
+
+## What to look at first (recommended order)
+1. **Mode selection UI:** `src/AKPay/ModeSelectionForm.cs`
+2. **Factory/selector:** `src/AKPay/Services/ServiceMode.cs`
+3. **Service contract:** `src/AKPay/Services/IAKPayService.cs`
+4. **Stored procedure service:** `src/AKPay/Services/AKPaySP.cs`
+5. **LINQ service:** `src/AKPay/Services/AKPayLINQ.cs`
+6. **EF DbContext + models:** `src/AKPay/Models/AkpayDbContext.cs`
+
+## Repository layout
+- `src/AKPay/` — WinForms app (UI + services + EF models)
+- `db/sproc_implementation/` — SQL Server schema, sprocs/functions/views, seed SQL + Python generators
+- `infra/k8s/` — Kubernetes manifests (course extra credit)
+- `docs/public/screenshots/` — portfolio screenshots
+
+## Database artifacts
+- Schema: `db/sproc_implementation/schema/001_initial_schema.sql`
+- Sprocs/views/indexes/triggers: `db/sproc_implementation/scripts/`
+- Seed data:
+  - Large generated seed: `db/sproc_implementation/seed_data/`
+  - Seed generators: `db/sproc_implementation/seed_data/seed_generator_scripts/`
+
+## Kubernetes (extra credit)
+Manifests live in `infra/k8s/`:
+- `deployservice.yaml`
+- `storage.yaml`
+
+These were used to keep the database state persistent across restarts/crashes during the deployment walkthrough.
+
+## Configuration
+This repo includes `src/AKPay/appsettings.json.example`.
+Create a local `src/AKPay/appsettings.json` with your SQL Server connection string (do not commit it).
+
+## Quick start (local)
+1. Ensure you have SQL Server running (LocalDB or full SQL Server works).
+2. Create `src/AKPay/appsettings.json` and set `ConnectionStrings:DefaultConnection`.
+3. Build/run:
+  - `dotnet build .\src\AKPay\AKPay.csproj`
+  - `dotnet run --project .\src\AKPay\AKPay.csproj`
+
+## Screenshots
+![Factory pattern mode selection](docs/public/screenshots/ss0_factory_pattern.png)
+
+![Welcome screen](docs/public/screenshots/ss1_welcome.png)
+
+![Dashboard](docs/public/screenshots/ss2_dashboard.png)
