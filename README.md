@@ -71,3 +71,14 @@ Create a local `src/AKPay/appsettings.json` with your SQL Server connection stri
   <img src="docs/public/screenshots/ss1_welcome.png" alt="Welcome screen" width="32%" />
   <img src="docs/public/screenshots/ss2_dashboard.png" alt="Dashboard" width="32%" />
 </p>
+
+## Contributors
+AKPay was built as a course team project.
+
+- [Fajr Fatima]
+- [Muhammad Hassan Musa Gondal]
+- [Muhammad Shahbaz Aziz Khan]
+
+[Fajr Fatima]: https://github.com/fajrfatima
+[Muhammad Hassan Musa Gondal]: https://github.com/Musa-Gondal
+[Muhammad Shahbaz Aziz Khan]: https://github.com/ShahbazAzizK
