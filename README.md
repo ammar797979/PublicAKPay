@@ -66,8 +66,8 @@ Create a local `src/AKPay/appsettings.json` with your SQL Server connection stri
   - `dotnet run --project .\src\AKPay\AKPay.csproj`
 
 ## Screenshots
-![Factory pattern mode selection](docs/public/screenshots/ss0_factory_pattern.png)
-
-![Welcome screen](docs/public/screenshots/ss1_welcome.png)
-
-![Dashboard](docs/public/screenshots/ss2_dashboard.png)
+<p align="center">
+  <img src="docs/public/screenshots/ss0_factory_pattern.png" alt="Factory pattern mode selection" width="32%" />
+  <img src="docs/public/screenshots/ss1_welcome.png" alt="Welcome screen" width="32%" />
+  <img src="docs/public/screenshots/ss2_dashboard.png" alt="Dashboard" width="32%" />
+</p>
